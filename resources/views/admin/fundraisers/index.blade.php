@@ -32,22 +32,7 @@
                             <span class="w-fit text-sm font-bold py-2 px-3 rounded-full bg-green-500 text-white">
                                 ACTIVE
                             </span>
-                        @else
-                            <span class="w-fit text-sm font-bold py-2 px-3 rounded-full bg-orange-500 text-white">
-                                PENDING
-                            </span>
-                        @endif
-                        
-                        <div class="hidden md:flex flex-row items-center gap-x-3">
-                            <form action="#" method="POST">
-                                @csrf
-                                @method('PUT')
-                                <button type="submit" class="font-bold py-4 px-6 bg-indigo-700 text-white rounded-full">
-                                    Approve
-                                </button>
-                            </form>
-                        </div>
-                        <div class="hidden md:flex flex-row items-center gap-x-3">
+                            <div class="hidden md:flex flex-row items-center gap-x-3">
                             <form action="#" method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -56,6 +41,23 @@
                                 </button>
                             </form>
                         </div>
+                        @else
+                            <span class="w-fit text-sm font-bold py-2 px-3 rounded-full bg-orange-500 text-white">
+                                PENDING
+                            </span>
+                            <div class="hidden md:flex flex-row items-center gap-x-3">
+                            <form action="{{ route('admin.fundraisers.update', $fundraiser) }}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <button type="submit" class="font-bold py-4 px-6 bg-indigo-700 text-white rounded-full">
+                                    Approve
+                                </button>
+                            </form>
+                        </div>
+                        @endif
+                        
+                        
+                        
                     </div>
                     @empty
                     <p>Belum ada Apply terbaru</p>
@@ -88,7 +90,7 @@
                                 PENDING
                             </span> 
                         @elseif($fundraiserStatus =='Active')
-                            <a href="#" class="font-bold py-4 px-6 bg-indigo-700 text-white rounded-full">
+                            <a href="{{ route('admin.fundraisings.create') }}" class="font-bold py-4 px-6 bg-indigo-700 text-white rounded-full">
                                 Create a Fundraising
                             </a>
                         @else
