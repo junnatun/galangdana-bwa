@@ -98,9 +98,7 @@
                                 Become Fundraiser
                             </button>
                         </form>
-                        <span class="w-fit text-sm font-bold py-2 px-3 rounded-full bg-orange-500 text-white">
-                            PENDING
-                        </span> 
+                        @endif
                     </div>
                 </div>
             </div>
