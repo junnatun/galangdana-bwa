@@ -11,7 +11,7 @@ class StoreFundraisingRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return $this->user()->hasAnyRole(['fundraiser']);
     }
 
     /**
