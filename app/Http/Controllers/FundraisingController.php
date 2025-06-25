@@ -75,7 +75,7 @@ class FundraisingController extends Controller
 
             $fundraising = Fundraising::create($validated);
         });
-        return redirect()->route('admin.categories.index');
+        return redirect()->route('admin.fundraisings.index');
     }
 
     /**
@@ -84,6 +84,15 @@ class FundraisingController extends Controller
     public function show(Fundraising $fundraising)
     {
         //
+        $totalDonations = $fundraising->totalReachedAmount();
+        $goalReached = $totalDonations >= $fundraising->target_amount;
+
+        $percentage = ($totalDonations / $fundraising->target_amount) * 100;
+        if ($percentage > 100) {
+            $percentage = 100;
+        }
+
+        return view('admin.fundraisings.show', compact('fundraising', 'goalReached', 'percentage', 'totalDonations'));
     }
 
     /**
@@ -92,6 +101,8 @@ class FundraisingController extends Controller
     public function edit(Fundraising $fundraising)
     {
         //
+        $categories = Category::all();
+        return view('admin.fundraisings.edit', compact('fundraising', 'categories'));
     }
 
     /**
